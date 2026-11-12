@@ -21,7 +21,7 @@ function require_login() {
         set_flash('error', 'Vui long dang nhap de tiep tuc.');
         // Luu lai trang dinh vao de sau khi login quay lai
         $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
-        redirect('/helpdesk/modules/auth/login.php');
+        redirect(app_url('modules/auth/login.php'));
     }
 }
 
@@ -31,6 +31,6 @@ function require_role(array $allowedRoles) {
     require_login();
     if (!in_array($_SESSION['user_role'], $allowedRoles, true)) {
         set_flash('error', 'Ban khong co quyen truy cap chuc nang nay.');
-        redirect('/helpdesk/modules/tickets/list.php');
+        redirect(app_url('modules/tickets/list.php'));
     }
 }

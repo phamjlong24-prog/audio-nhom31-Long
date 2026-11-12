@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../includes/functions.php';
 
 // Neu da dang nhap roi thi khong can vao trang login nua
 if (!empty($_SESSION['user_id'])) {
-    redirect('/helpdesk/modules/tickets/list.php');
+    redirect(app_url('modules/tickets/list.php'));
 }
 
 $errors = [];
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_role'] = $user['role'];
 
-            $redirect = $_SESSION['redirect_after_login'] ?? '/helpdesk/modules/tickets/list.php';
+            $redirect = $_SESSION['redirect_after_login'] ?? app_url('modules/tickets/list.php');
             unset($_SESSION['redirect_after_login']);
 
             set_flash('success', 'Dang nhap thanh cong. Xin chao ' . $user['name'] . '!');
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Dang nhap - Helpdesk CNTT</title>
-    <link rel="stylesheet" href="/helpdesk/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?= e(app_url('public/assets/css/style.css')) ?>">
 </head>
 <body>
 <main class="container" style="max-width:400px;margin-top:60px;">

@@ -7,4 +7,4 @@ session_destroy();
 
 session_start();
 set_flash('success', 'Ban da dang xuat.');
-redirect('/helpdesk/modules/auth/login.php');
+redirect(app_url('modules/auth/login.php'));

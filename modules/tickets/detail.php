@@ -100,7 +100,7 @@ require_once __DIR__ . '/../../includes/header.php';
 
 <?php if (in_array($current_user_role, ['staff', 'manager'], true)): ?>
 <h2>Doi trang thai</h2>
-<form method="POST" action="/helpdesk/modules/tickets/update_status.php">
+<form method="POST" action="<?= e(app_url('modules/tickets/update_status.php')) ?>">
     <input type="hidden" name="ticket_id" value="<?= (int)$ticket['id'] ?>">
     <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
     <div class="form-group" style="max-width:300px;">
@@ -118,7 +118,7 @@ require_once __DIR__ . '/../../includes/header.php';
 <hr>
 
 <h2>Phan cong nhan vien xu ly</h2>
-<form method="POST" action="/helpdesk/modules/assignments/assign.php">
+<form method="POST" action="<?= e(app_url('modules/assignments/assign.php')) ?>">
     <input type="hidden" name="ticket_id" value="<?= (int)$ticket['id'] ?>">
     <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
     <div class="form-group" style="max-width:300px;">
@@ -164,7 +164,7 @@ require_once __DIR__ . '/../../includes/header.php';
     </div>
 <?php endwhile; ?>
 
-<form method="POST" action="/helpdesk/modules/comments/add.php">
+<form method="POST" action="<?= e(app_url('modules/comments/add.php')) ?>">
     <input type="hidden" name="ticket_id" value="<?= (int)$ticket['id'] ?>">
     <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
     <div class="form-group">

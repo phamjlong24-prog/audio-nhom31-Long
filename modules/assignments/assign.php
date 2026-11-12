@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../includes/auth_check.php';
 require_role(['staff', 'manager']);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    redirect('/helpdesk/modules/tickets/list.php');
+    redirect(app_url('modules/tickets/list.php'));
 }
 csrf_check();
 
@@ -13,7 +13,7 @@ $staff_id = (int)($_POST['staff_id'] ?? 0);
 
 if ($ticket_id <= 0 || $staff_id <= 0) {
     set_flash('error', 'Du lieu phan cong khong hop le.');
-    redirect("/helpdesk/modules/tickets/detail.php?id={$ticket_id}");
+    redirect(app_url("modules/tickets/detail.php?id={$ticket_id}"));
 }
 
 // Kiem tra staff_id thuc su co role = staff
@@ -24,7 +24,7 @@ mysqli_stmt_store_result($chk);
 if (mysqli_stmt_num_rows($chk) === 0) {
     mysqli_stmt_close($chk);
     set_flash('error', 'Nhan vien khong hop le.');
-    redirect("/helpdesk/modules/tickets/detail.php?id={$ticket_id}");
+    redirect(app_url("modules/tickets/detail.php?id={$ticket_id}"));
 }
 mysqli_stmt_close($chk);
 
@@ -56,4 +56,4 @@ try {
     set_flash('error', 'Loi khi phan cong: ' . $e->getMessage());
 }
 
-redirect("/helpdesk/modules/tickets/detail.php?id={$ticket_id}");
+redirect(app_url("modules/tickets/detail.php?id={$ticket_id}"));

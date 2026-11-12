@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../includes/auth_check.php';
 require_login();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    redirect('/helpdesk/modules/tickets/list.php');
+    redirect(app_url('modules/tickets/list.php'));
 }
 csrf_check();
 
@@ -15,12 +15,12 @@ $content = trim($_POST['content'] ?? '');
 
 if ($ticket_id <= 0) {
     set_flash('error', 'Ticket khong hop le.');
-    redirect('/helpdesk/modules/tickets/list.php');
+    redirect(app_url('modules/tickets/list.php'));
 }
 
 if ($content === '') {
     set_flash('error', 'Noi dung binh luan khong duoc de trong.');
-    redirect("/helpdesk/modules/tickets/detail.php?id={$ticket_id}");
+    redirect(app_url("modules/tickets/detail.php?id={$ticket_id}"));
 }
 
 $stmt = mysqli_prepare($conn, "INSERT INTO ticket_comments (ticket_id, user_id, content) VALUES (?, ?, ?)");
@@ -33,4 +33,4 @@ if (mysqli_stmt_execute($stmt)) {
 }
 mysqli_stmt_close($stmt);
 
-redirect("/helpdesk/modules/tickets/detail.php?id={$ticket_id}");
+redirect(app_url("modules/tickets/detail.php?id={$ticket_id}"));
