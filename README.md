@@ -27,18 +27,34 @@ va khao sat su hai long sau khi dong ticket.
 
 ## Phan cong module (8 bang)
 
-| Thanh vien | Bang phu trach | Module |
-|---|---|---|
-| Long | `users`, `ticket_categories`, `sla_rules`, `satisfaction_surveys` | Nen tang, danh muc, khao sat |
-| Long | `tickets`, `ticket_assignments`, `ticket_comments`, `ticket_status_logs` | Xu ly ticket (loi) |
+Bang `users` la bang nen tang dung chung cho toan he thong (khong thuoc rieng
+module nao) - ca 2 module deu tham chieu toi qua khoa ngoai. Ca 2 module do Long thuc hien.
 
-## Tien do den 07/08/2026
-- [x] Chot de tai, ERD, schema.sql, seed_data.sql
-- [x] Long: List + Create cho `ticket_categories`
-- [x] Long: List + Create cho `tickets` (co ghi log trang thai)
-- [ ] Edit/Delete cho tat ca module (den 19/08)
-- [ ] Module SLA, assignments, comments, surveys (den 19/08)
-- [ ] Auth that + phan quyen (diem cong, den 19/08)
+| Nguoi thuc hien | Module | Bang phu trach |
+|---|---|---|
+| Long | Cau hinh & Danh gia dich vu | `ticket_categories`, `sla_rules`, `satisfaction_surveys` |
+| Long | Xu ly ticket (loi nghiep vu chinh) | `tickets`, `ticket_assignments`, `ticket_comments`, `ticket_status_logs` |
+
+## Tien do
+
+- [x] Chot de tai, ERD (`docs/erd.png`), `schema.sql`, `seed_data.sql`
+- [x] Long: CRUD day du cho `ticket_categories` (List/Create/Edit/Delete)
+- [x] Long: CRUD day du cho `sla_rules`, dam bao quan he 1-1 voi category
+- [x] Long: CRUD day du cho `satisfaction_surveys`, chi tao duoc khi ticket `closed`
+- [x] Long: List/Create/Edit/Delete cho `tickets`
+- [x] Long: Trang chi tiet ticket (`detail.php`) gop doi trang thai, phan cong, binh luan, xem log
+- [x] Long: Workflow phan cong (`ticket_assignments`) dam bao chi 1 assignment active/ticket
+- [x] Long: Workflow binh luan (`ticket_comments`)
+- [x] Long: Ghi log trang thai tu dong, khong the sua/xoa (`ticket_status_logs`)
+- [ ] Auth that (login/logout, hash password) - diem cong B1
+- [ ] Phan quyen requester/staff/manager - diem cong B2
+
+## Luong su dung chinh
+1. Long tao danh muc (`modules/categories`) va cau hinh SLA (`modules/sla`)
+2. Nguoi dung tao ticket (`modules/tickets/create.php`), chon danh muc co san
+3. Vao trang chi tiet ticket (`modules/tickets/detail.php`) de: phan cong nhan vien,
+   doi trang thai, trao doi binh luan - moi thao tac deu tu dong ghi log
+4. Khi ticket chuyen `closed`, Long co the tao khao sat (`modules/surveys/create.php`)
 
 ## Tai khoan demo (seed data)
 - long@tlu.edu.vn (staff)

@@ -12,6 +12,7 @@
         <a href="/helpdesk/modules/tickets/list.php">Tickets</a>
         <a href="/helpdesk/modules/categories/list.php">Danh muc</a>
         <a href="/helpdesk/modules/sla/list.php">SLA</a>
+        <a href="/helpdesk/modules/surveys/list.php">Khao sat</a>
     </nav>
 </header>
 <main class="container">
