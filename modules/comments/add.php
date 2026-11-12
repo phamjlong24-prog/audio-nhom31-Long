@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/auth_check.php';
+require_login();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect('/helpdesk/modules/tickets/list.php');
 }
 csrf_check();
 
-// TAM THOI: chua co Auth that
-$current_user_id = 1;
+$current_user_id = $_SESSION['user_id'];
 
 $ticket_id = (int)($_POST['ticket_id'] ?? 0);
 $content = trim($_POST['content'] ?? '');

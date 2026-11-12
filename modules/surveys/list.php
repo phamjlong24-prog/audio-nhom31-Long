@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/auth_check.php';
+require_role(['staff', 'manager']);
 
 $sql = "SELECT sv.id, sv.rating, sv.feedback, sv.created_at,
                t.id AS ticket_id, t.title AS ticket_title

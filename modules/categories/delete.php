@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/auth_check.php';
+require_role(['staff', 'manager']);
 
 // Chi cho phep xoa bang POST, khong cho GET (yeu cau bat buoc trong barem)
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/auth_check.php';
+require_login();
 
 // JOIN de hien thi TEN thay vi ID (yeu cau bat buoc trong barem A5)
 $sql = "SELECT t.id, t.title, t.status, t.created_at,

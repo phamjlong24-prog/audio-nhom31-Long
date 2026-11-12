@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/auth_check.php';
+require_login();
 
-// TAM THOI: chua co Auth that, gia dinh user dang thao tac la id = 1 (staff)
-// Khi lam xong Auth (B1) se thay bang $_SESSION['user_id']
-$current_user_id = 1;
+$current_user_id = $_SESSION['user_id'];
+$current_user_role = $_SESSION['user_role'];
 
 $ticket_id = (int)($_GET['id'] ?? 0);
 if ($ticket_id <= 0) {
@@ -84,6 +84,7 @@ require_once __DIR__ . '/../../includes/header.php';
         <td><?= $activeAssignment ? e($activeAssignment['staff_name']) : '(chua phan cong)' ?></td></tr>
 </table>
 
+<?php if (in_array($current_user_role, ['staff', 'manager'], true)): ?>
 <p style="margin-top:12px;">
     <a href="edit.php?id=<?= (int)$ticket['id'] ?>">Sua thong tin ticket</a> |
     <form method="POST" action="delete.php" style="display:inline"
@@ -93,9 +94,11 @@ require_once __DIR__ . '/../../includes/header.php';
         <button type="submit" class="btn btn-danger" style="padding:2px 8px;font-size:12px;">Xoa ticket</button>
     </form>
 </p>
+<?php endif; ?>
 
 <hr>
 
+<?php if (in_array($current_user_role, ['staff', 'manager'], true)): ?>
 <h2>Doi trang thai</h2>
 <form method="POST" action="/helpdesk/modules/tickets/update_status.php">
     <input type="hidden" name="ticket_id" value="<?= (int)$ticket['id'] ?>">
@@ -132,6 +135,10 @@ require_once __DIR__ . '/../../includes/header.php';
 </form>
 
 <hr>
+<?php else: ?>
+<p><em>Ban dang xem voi quyen requester - chi staff/manager moi doi duoc trang thai va phan cong.</em></p>
+<hr>
+<?php endif; ?>
 
 <h2>Lich su trang thai (khong the sua/xoa)</h2>
 <table>

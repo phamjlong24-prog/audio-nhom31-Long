@@ -23,7 +23,48 @@ va khao sat su hai long sau khi dong ticket.
    ```
 2. Cau hinh ket noi trong `config/db.php` (mac dinh: root, khong mat khau, db `helpdesk`)
 3. Dat thu muc `helpdesk/` vao thu muc goc web server (vd: `htdocs/` cua XAMPP)
-4. Truy cap: `http://localhost/helpdesk/modules/tickets/list.php`
+4. Truy cap: `http://localhost/helpdesk/` (se tu dong chuyen den trang dang nhap)
+
+## Dang nhap (Auth - diem cong B1)
+
+Tat ca tai khoan demo dung chung 1 mat khau: **`123456`**
+
+| Email | Vai tro (role) |
+|---|---|
+| long@tlu.edu.vn | staff |
+| binh@tlu.edu.vn | staff |
+| huong@tlu.edu.vn | manager |
+| mai@tlu.edu.vn | requester |
+| nam@tlu.edu.vn | requester |
+
+Mat khau duoc luu duoi dang bcrypt hash (`password_hash()`), khong bao gio luu
+chuoi tho. Dang xuat se huy toan bo session (`session_destroy()`), khong chi
+an giao dien.
+
+## Ma tran phan quyen (B2)
+
+| Chuc nang | requester | staff | manager |
+|---|:---:|:---:|:---:|
+| Xem danh sach / chi tiet ticket | Co | Co | Co |
+| Tao ticket moi | Co | Co | Co |
+| Binh luan vao ticket | Co | Co | Co |
+| Sua / xoa thong tin ticket | Khong | Co | Co |
+| Doi trang thai ticket | Khong | Co | Co |
+| Phan cong nhan vien xu ly | Khong | Co | Co |
+| Quan ly danh muc (`ticket_categories`) | Khong | Co | Co |
+| Quan ly SLA (`sla_rules`) | Khong | Co | Co |
+| Quan ly khao sat (`satisfaction_surveys`) | Khong | Co | Co |
+
+Phan quyen duoc chan **ca 2 lop**:
+- **Backend**: moi file trong `modules/` (tru `auth/`) goi `require_login()` hoac
+  `require_role(['staff','manager'])` tu `includes/auth_check.php` ngay dong dau
+  tien - truy cap thang URL cung bi chan, khong chi an nut giao dien.
+- **Giao dien**: menu va nut thao tac trong `detail.php`/`header.php` chi hien
+  ra khi dung role, tranh nguoi dung thay nut roi bam vao gap loi kho hieu.
+
+Cach test allow/deny: dang nhap `mai@tlu.edu.vn` (requester) roi thu truy cap
+thang `modules/categories/list.php` - se bi chan va chuyen huong ve trang
+ticket kem thong bao loi.
 
 ## Phan cong module (8 bang)
 
@@ -46,8 +87,8 @@ module nao) - ca 2 module deu tham chieu toi qua khoa ngoai. Ca 2 module do Long
 - [x] Long: Workflow phan cong (`ticket_assignments`) dam bao chi 1 assignment active/ticket
 - [x] Long: Workflow binh luan (`ticket_comments`)
 - [x] Long: Ghi log trang thai tu dong, khong the sua/xoa (`ticket_status_logs`)
-- [ ] Auth that (login/logout, hash password) - diem cong B1
-- [ ] Phan quyen requester/staff/manager - diem cong B2
+- [x] Auth that (login/logout, hash password) - diem cong B1
+- [x] Phan quyen requester/staff/manager - diem cong B2 (chan ca backend + giao dien)
 
 ## Luong su dung chinh
 1. Long tao danh muc (`modules/categories`) va cau hinh SLA (`modules/sla`)

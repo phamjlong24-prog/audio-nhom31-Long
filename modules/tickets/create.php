@@ -1,15 +1,14 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/auth_check.php';
+require_login();
 
 $errors = [];
 $title = '';
 $description = '';
 $category_id = '';
 
-// TAM THOI: chua co Auth that, gia dinh requester dang login la id = 3
-// Khi lam B1 (Auth) se thay bang $_SESSION['user_id']
-$current_user_id = 3;
+$current_user_id = $_SESSION['user_id'];
 
 // Lay danh sach category cho dropdown
 $categories = mysqli_query($conn, "SELECT id, name FROM ticket_categories ORDER BY name");

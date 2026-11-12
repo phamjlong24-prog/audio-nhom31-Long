@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/auth_check.php';
+require_role(['staff', 'manager']);
 
 // Lay danh sach category kem so ticket dang su dung (JOIN don gian)
 $sql = "SELECT c.id, c.name, c.description,

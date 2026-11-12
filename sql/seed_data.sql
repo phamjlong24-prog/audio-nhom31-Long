@@ -1,13 +1,12 @@
 USE helpdesk;
 
--- Mat khau demo cho tat ca: "123456" (da hash bang password_hash() PHP, bcrypt)
--- Hash mau duoi day tuong ung "123456" - dung de test login sau nay
+-- Mat khau demo cho tat ca: "123456" (bcrypt hash that, dung de test login)
 INSERT INTO users (name, email, password_hash, role, phone) VALUES
-('Nguyen Van Long', 'long@tlu.edu.vn', '$2y$10$examplehashonly1234567890abcdefghijk', 'staff', '0900000001'),
-('Tran Van Binh', 'binh@tlu.edu.vn', '$2y$10$examplehashonly1234567890abcdefghijk', 'staff', '0900000002'),
-('Le Thi Mai', 'mai@tlu.edu.vn', '$2y$10$examplehashonly1234567890abcdefghijk', 'requester', '0900000003'),
-('Pham Van Nam', 'nam@tlu.edu.vn', '$2y$10$examplehashonly1234567890abcdefghijk', 'requester', '0900000004'),
-('Do Thi Huong', 'huong@tlu.edu.vn', '$2y$10$examplehashonly1234567890abcdefghijk', 'manager', '0900000005');
+('Nguyen Van Long', 'long@tlu.edu.vn', '$2b$10$dJsrxFJAQ4ZsVxoopNcnue6ybrtNC/LY3yBT5aJOtvJG1NOs71Rni', 'staff', '0900000001'),
+('Tran Van Binh', 'binh@tlu.edu.vn', '$2b$10$dJsrxFJAQ4ZsVxoopNcnue6ybrtNC/LY3yBT5aJOtvJG1NOs71Rni', 'staff', '0900000002'),
+('Le Thi Mai', 'mai@tlu.edu.vn', '$2b$10$dJsrxFJAQ4ZsVxoopNcnue6ybrtNC/LY3yBT5aJOtvJG1NOs71Rni', 'requester', '0900000003'),
+('Pham Van Nam', 'nam@tlu.edu.vn', '$2b$10$dJsrxFJAQ4ZsVxoopNcnue6ybrtNC/LY3yBT5aJOtvJG1NOs71Rni', 'requester', '0900000004'),
+('Do Thi Huong', 'huong@tlu.edu.vn', '$2b$10$dJsrxFJAQ4ZsVxoopNcnue6ybrtNC/LY3yBT5aJOtvJG1NOs71Rni', 'manager', '0900000005');
 
 INSERT INTO ticket_categories (name, description) VALUES
 ('Mang - Wifi', 'Su co ket noi mang, wifi khong vao duoc'),
